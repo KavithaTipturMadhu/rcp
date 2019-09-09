@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command Line Documentation &mdash; Radeon Compute Profiler 5.4 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Radeon Compute Profiler 5.4 documentation" href="index.html"/>
+        <link rel="next" title="Supported Performance Counters" href="perfcounters.html"/>
+        <link rel="prev" title="Using the Radeon Compute Profiler" href="using.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Radeon Compute Profiler
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using the Radeon Compute Profiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using.html#application-trace-mode">Application Trace Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#performance-counter-mode">Performance Counter Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#additional-data">Additional Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#usage-model">Usage Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-usage">General Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#profile-mode-options">Profile Mode options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-trace-mode-options-for-apitrace-and-hsatrace-and-hsaaqlpackettrace">Application Trace mode options (for <code class="docutils literal"><span class="pre">--apitrace</span></code> and <code class="docutils literal"><span class="pre">-–hsatrace</span></code> and <code class="docutils literal"><span class="pre">--hsaaqlpackettrace</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-counter-mode-options-for-perfcounter-and-hsapmc">Performance Counter mode options (for <code class="docutils literal"><span class="pre">--perfcounter</span></code>  and <code class="docutils literal"><span class="pre">--hsapmc</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trace-summary-mode-options-for-tracesummary">Trace Summary mode options (for <code class="docutils literal"><span class="pre">--tracesummary</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#occupancy-display-mode-options-for-occupancydisplay">Occupancy display mode options (for <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-command-lines">Example Command lines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="perfcounters.html">Supported Performance Counters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputfiles.html">Output Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#performance-counter-output-session-name-csv">Performance Counter Output (SESSION_NAME.csv)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#application-trace-output-session-name-atp">Application Trace Output (SESSION_NAME.atp)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#api-trace-section">API Trace Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#timestamp-section">Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#hsa-kernel-timestamp-section">HSA Kernel Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#source-code-section">Source Code Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#perf-marker-section">Perf Marker Section</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#kernel-occupancy-output-session-name-occupancy">Kernel Occupancy Output (SESSION_NAME.occupancy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-counter-configuration-file-argument-passed-to-counterfile">Format of counter configuration file (argument passed to <code class="docutils literal"><span class="pre">--counterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-kernel-list-configuration-file-argument-passed-to-kernellistfile">Format of kernel list configuration file (argument passed to <code class="docutils literal"><span class="pre">--kernellistfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-api-rules-configuration-file-argument-passed-to-apirulesfile">Format of API rules configuration file (argument passed to <code class="docutils literal"><span class="pre">--apirulesfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-api-filter-configuration-file-argument-passed-to-apifilterfile">Format of API filter configuration file (argument passed to <code class="docutils literal"><span class="pre">--apifilterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-environment-variable-file-argument-passed-to-envvarfile">Format of environment variable file (argument passed to <code class="docutils literal"><span class="pre">--envvarfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-occupancy-display-configuration-file-argument-passed-to-occupancydisplay">Format of occupancy display configuration file (argument passed to <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="occupancy.html">Kernel Occupancy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="occupancy.html#kernel-occupancy-for-amd-radeon-hd-5000-6000-series-based-on-vliw5-vliw4-architecture">Kernel Occupancy for AMD Radeon™ HD 5000/6000 Series Based on VLIW5/VLIW4 Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#lds-limits-on-the-number-of-in-flight">1. LDS limits on the number of in-flight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#gpr-limits-on-the-number-of-in-flight-wavefronts">2. GPR limits on the number of in-flight wavefronts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#other-constraints">3. Other constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="occupancy.html#kernel-occupancy-for-amd-radeon-hd-7000-series-or-newer-based-on-graphics-core-next-architecture">Kernel Occupancy for AMD Radeon™ HD 7000 Series or Newer, Based on Graphics Core Next Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How Do I…</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-import-profiler-data-into-codexl-for-viewing">How do I import profiler data into CodeXL for viewing?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-collect-a-full-set-of-performance-counters-for-my-application">How do I collect a full set of Performance Counters for my application?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-counter-files-to-pass-to-the-counterfile-switch">How do I generate counter files to pass to the <code class="docutils literal"><span class="pre">--counterfile</span></code> switch?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-determine-how-many-passes-are-required-for-a-set-of-counters">How do I determine how many passes are required for a set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-a-set-of-single-pass-counter-files-from-a-given-set-of-counters">How do I generate a set of single-pass counter files from a given set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-force-a-single-pass-profile">How do I force a single-pass profile?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-limit-the-amount-of-profiling-data-generated">How do I limit the amount of profiling data generated?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#general-features-for-limiting-profiling-data">General features for limiting profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#features-specific-to-application-trace-mode">Features specific to Application Trace mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#features-specific-to-performance-counter-mode">Features specific to Performance Counter mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-html-summary-pages">How do I generate HTML Summary Pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-specify-which-rules-should-be-used-when-generating-summary-pages">How do I specify which rules should be used when generating Summary pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-find-out-which-source-code-called-a-particular-api-call-in-the-application-trace-file-atp-file">How do I find out which source code called a particular API call in the Application Trace file (.atp file)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-a-kernel-occupancy-display-html-file">How do I generate a Kernel Occupancy Display HTML file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-annotate-the-timeline-data-with-application-specific-events">How do I annotate the timeline data with application specific events?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-collect-gpu-performance-counters-directly-from-my-application-without-using-the-profiler">How do I collect GPU Performance Counters directly from my application without using the profiler?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-ensure-that-my-opencl-application-trace-contains-all-api-trace-data">How do I ensure that my OpenCL application trace contains all API trace data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-report-an-issue-with-radeon-compute-profiler">How do I report an issue with Radeon Compute Profiler</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Radeon Compute Profiler</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Command Line Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="command-line-documentation">
+<span id="id1"></span><h1>Command Line Documentation<a class="headerlink" href="#command-line-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-usage">
+<h2>General Usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
+<p>The main format of the rcprof command line is</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">&lt;options&gt;</span> <span class="pre">InputApplication</span> <span class="pre">[InputApplication's</span> <span class="pre">command</span> <span class="pre">line</span> <span class="pre">arguments]</span></code></p>
+<p><strong>InputApplication</strong> is the application you want to profile.</p>
+<p>Any arguments on the command line after <strong>InputApplication</strong> will be passed as
+arguments to the application.</p>
+<p>The list of available options is shown in the table below. In general, you
+would specify a <em>Profile Mode</em>, any desired <em>General Options</em>, and any
+other arguments that are applicable to that specified profile mode.</p>
+<p>There are separate rcprof executables for profiling 64-bit vs. 32-bit
+applications. You should use the version of the profiler executable whose
+bitness matches the bitness of the application you want to profile.</p>
+<p>On Windows, the 64-bit executable is named <em>rcprof-x64.exe</em>, while the 32-bit
+executable is named <em>rcprof.exe</em>.</p>
+<p>On Linux, the 64-bit executable is named <em>rcprof</em>, while the 32-bit executable
+is named <em>rcprof32</em>.</p>
+<p>If the bitness of the profiler does not match the bitness of the application to
+be profiled, a message will be written to the terminal window by rcprof.</p>
+<div class="section" id="profile-mode-options">
+<h3>Profile Mode options<a class="headerlink" href="#profile-mode-options" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-t</span> <span class="pre">[--apitrace]</span></code></td>
+<td>Trace OpenCL™ application and generate CPU and GPU
+timestamps and detailed API call traces.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-p</span> <span class="pre">[</span> <span class="pre">--perfcounter</span> <span class="pre">]</span></code></td>
+<td>Get the performance counters for each OpenCL™
+kernel dispatched by the application.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-A</span> <span class="pre">[</span> <span class="pre">--hsatrace]</span></code></td>
+<td>Trace HSA application and generate CPU and GPU
+time stamps and detailed API call traces. (Linux only)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-C</span> <span class="pre">[</span> <span class="pre">--hsapmc]</span></code></td>
+<td>Get the performance counters for each HSA kernel
+kernel dispatched by the application. (Linux only)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--hsaaqlpackettrace</span></code></td>
+<td>Enable HSA AQL Packet tracing. This enhances
+the <code class="docutils literal"><span class="pre">--hsatrace</span></code> output by adding information about all AQL packets
+processed by the application. (Linux only)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-O</span> <span class="pre">[</span> <span class="pre">--occupancy</span> <span class="pre">]</span></code></td>
+<td>Generate kernel occupancy information file
+(.occupancy). When profiling an HSA application, occupancy information can
+only be collected while also collecting performance counters</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-P</span> <span class="pre">[</span> <span class="pre">--occupancydisplay</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to configuration file to use to
+generate an occupancy display file. Specify the occupancy display file that
+is to be generated with <code class="docutils literal"><span class="pre">--outputfile</span></code>. See <a class="reference internal" href="configfiles.html#format-of-occdisplay-configuration-file"><span class="std std-ref">Format of occupancy display configuration file (argument passed to --occupancydisplay)</span></a>
+for information about the configuration file format</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-T</span> <span class="pre">[</span> <span class="pre">--tracesummary</span> <span class="pre">]</span></code></td>
+<td>Generate summary page from an input .atp file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="general-options">
+<h3>General options<a class="headerlink" href="#general-options" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--startdisabled</span></code></td>
+<td>Start the application with profiling disabled. This
+is useful for applications that call <code class="docutils literal"><span class="pre">amdtStopProfiling</span></code> and
+<code class="docutils literal"><span class="pre">amdtResumeProfiling</span></code> from the AMDTActivityLogger library.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-d</span> <span class="pre">[startdelay]</span> <span class="pre">arg</span></code></td>
+<td>Profiling will be enabled after the specified
+delay (in milliseconds). This delay is relative to the first API call
+(either OpenCL or HSA) made by the application.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-D</span> <span class="pre">[profileduration]</span> <span class="pre">arg</span></code></td>
+<td>Profile duration in milliseconds.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-e</span> <span class="pre">[</span> <span class="pre">--envvar</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Environment variable that should be defined
+when running the profiled application. Argument should be in the format
+NAME=VALUE.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-E</span> <span class="pre">[</span> <span class="pre">--envvarfile</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to a file containing a list of
+environment variables that should be defined when running the profiled
+application. The file should contain one line for each variable in the
+format NAME=VALUE. See <a class="reference internal" href="configfiles.html#format-of-envvar-configuration-file"><span class="std std-ref">Format of environment variable file (argument passed to --envvarfile)</span></a> for
+more information about the configuration file format</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-f</span> <span class="pre">[</span> <span class="pre">--fullenv</span> <span class="pre">]</span></code></td>
+<td>The environment variables specified with the
+<code class="docutils literal"><span class="pre">--envvar</span></code> switch represent the full environment block. If not specified,
+then the environment variables represent additions or changes to the system
+environment block.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-l</span> <span class="pre">[</span> <span class="pre">--list</span> <span class="pre">]</span></code></td>
+<td>Print a list of valid counter names.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">--listactive</span></code></td>
+<td>Print a list of valid counter names for active
+devices.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-L</span> <span class="pre">[listdetailed]</span></code></td>
+<td>Print a list of valid counter names with
+descriptions.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">--listdetailedactive</span></code></td>
+<td>Print a list of valid counter names with
+descriptions for active devices.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-N</span> <span class="pre">[</span> <span class="pre">--sessionname</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Name of the generated session. If not
+specified, the name is the parent directory of the OutputFile.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">--maxpassperfile</span> <span class="pre">arg</span></code></td>
+<td>Limits the set of counters in the generated
+counter file to a set that can be collected in the the specified number of
+passes. If the full set of counters do not fit in the specified number of
+passes, then multiple counter files will be generated. Ignored if
+<code class="docutils literal"><span class="pre">--list</span></code> and <code class="docutils literal"><span class="pre">--outputfile</span></code> are not specified.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--numberofpass</span></code></td>
+<td>Print the number of passes required for the
+specified counter set (or the default set if no counter file is specified).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-o</span> <span class="pre">[</span> <span class="pre">--outputfile</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to OutputFile. If not provided, the
+default is <code class="docutils literal"><span class="pre">Session1.csv</span></code> in an <strong>RCP</strong> directory  under the current user’s
+Documents directory; when performing an API trace, the default is
+<code class="docutils literal"><span class="pre">apitrace.atp</span></code> in the same location.  For Linux, the default location is the
+current user’s home directory. Note: if the specified output file name
+contains the string <code class="docutils literal"><span class="pre">___PID___</span></code>, this string will be replaced with a
+string made up of the process id and a unique timestamp in the format
+<em>pid_timestamp</em>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--hsanokerneldemangle</span></code></td>
+<td>Disable the demangling of kernel names (Linux
+only).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-v</span> <span class="pre">[</span> <span class="pre">--version</span> <span class="pre">]</span></code></td>
+<td>Print the rcprof version number.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-w</span> <span class="pre">[</span> <span class="pre">--workingdirectory</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Set the working directory. If not
+provided, the default is the application binary’s path.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-h</span> <span class="pre">[</span> <span class="pre">--help</span> <span class="pre">]</span></code></td>
+<td>Print a help message.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--showdoc</span></code></td>
+<td>Launch the documentation in a web browser (if one is available).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="application-trace-mode-options-for-apitrace-and-hsatrace-and-hsaaqlpackettrace">
+<h3>Application Trace mode options (for <code class="docutils literal"><span class="pre">--apitrace</span></code> and <code class="docutils literal"><span class="pre">-–hsatrace</span></code> and <code class="docutils literal"><span class="pre">--hsaaqlpackettrace</span></code>)<a class="headerlink" href="#application-trace-mode-options-for-apitrace-and-hsatrace-and-hsaaqlpackettrace" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-F</span> <span class="pre">[</span> <span class="pre">--apifilterfile</span> <span class="pre">]</span></code></td>
+<td>Path to the API filter file which contains a
+list of OpenCL™ or HSA APIs to be filtered out when performing an API
+trace. See <a class="reference internal" href="configfiles.html#format-of-apifilter-configuration-file"><span class="std std-ref">Format of API filter configuration file (argument passed to --apifilterfile)</span></a> for information
+about the API filter file format.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-i</span> <span class="pre">[</span> <span class="pre">--interval</span> <span class="pre">]</span> <span class="pre">arg</span> <span class="pre">(=100)</span></code></td>
+<td>Timeout interval in milliseconds.
+Ignored when not performing an API trace and using timeout mode.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-m</span> <span class="pre">[</span> <span class="pre">--timeout</span> <span class="pre">]</span></code></td>
+<td>Flush Trace data periodically, default timeout
+interval is 100 milliseconds (can be changed with <code class="docutils literal"><span class="pre">--interval</span></code> switch).
+Ignored when not performing an API trace. (Windows only, this is the
+default mode for Linux.)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-M</span> <span class="pre">[</span> <span class="pre">--maxapicalls</span> <span class="pre">]</span> <span class="pre">(=1000000)</span></code></td>
+<td>Maximum number of API calls.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-n</span> <span class="pre">[</span> <span class="pre">--nocollapse</span> <span class="pre">]</span></code></td>
+<td>Do not collapse consecutive identical
+<code class="docutils literal"><span class="pre">clGetEventInfo</span></code> calls into a single call in the trace output. Ignored when
+not performing an API trace.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-r</span> <span class="pre">[</span> <span class="pre">--ret</span> <span class="pre">]</span></code></td>
+<td>Always include the OpenCL™ API return code in API
+trace, even if client application does not query it. Ignored when not
+performing an API trace.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-y</span> <span class="pre">[</span> <span class="pre">--sym</span> <span class="pre">]</span></code></td>
+<td>Generate symbol information file (.st) for API trace,
+if available. Ignored when not performing an API trace.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="performance-counter-mode-options-for-perfcounter-and-hsapmc">
+<h3>Performance Counter mode options (for <code class="docutils literal"><span class="pre">--perfcounter</span></code>  and <code class="docutils literal"><span class="pre">--hsapmc</span></code>)<a class="headerlink" href="#performance-counter-mode-options-for-perfcounter-and-hsapmc" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-c</span> <span class="pre">[</span> <span class="pre">--counterfile</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to the counter file to enable
+selected counters (case-sensitive). If not provided, all counters are used.
+Ignored when performing an API trace.  See
+<a class="reference internal" href="configfiles.html#format-of-counter-configuration-file"><span class="std std-ref">Format of counter configuration file (argument passed to --counterfile)</span></a> for information about the
+counter file format.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-g</span> <span class="pre">[</span> <span class="pre">--singlepass</span> <span class="pre">]</span></code></td>
+<td>Only allow a single pass when collecting
+performance counters. Any counters that cannot fit into a single pass will
+be ignored. If specified, the GPUTime will not be collected, as a separate
+pass is required to query the GPUTime (OpenCL™ only, this is the default
+for HSA).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-G</span> <span class="pre">[</span> <span class="pre">--nogputime</span> <span class="pre">]</span></code></td>
+<td>Skip collection of GPUTime when profiling a
+kernel (GPUTime requires a separate pass) (OpenCL™ only, this is the
+default for HSA).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-k</span> <span class="pre">[</span> <span class="pre">--kerneloutput</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td><div class="first last line-block">
+<div class="line">Output the specified kernel file (OpenCL™ only). Valid argument values are:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal"><span class="pre">il</span></code>:    output kernel IL files</div>
+<div class="line"><code class="docutils literal"><span class="pre">isa</span></code>:   output kernel ISA files</div>
+<div class="line"><code class="docutils literal"><span class="pre">cl</span></code>:    output kernel CL files</div>
+<div class="line"><code class="docutils literal"><span class="pre">hsail</span></code>: output kernel HSAIL files</div>
+<div class="line"><code class="docutils literal"><span class="pre">all</span></code>:   output all files</div>
+</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-K</span> <span class="pre">[</span> <span class="pre">--kernellistfile</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to the kernel list file which
+contains a case-sensitive list of kernels to profile. If not provided, all
+kernels will be profiled. See <a class="reference internal" href="configfiles.html#format-of-kernellist-configuration-file"><span class="std std-ref">Format of kernel list configuration file (argument passed to --kernellistfile)</span></a>
+for information about the kernel list file format.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-s</span> <span class="pre">[</span> <span class="pre">--outputseparator</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Character used to separate fields in
+the OutputFile. Ignored when performing an API trace.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-x</span> <span class="pre">[</span> <span class="pre">--maxkernels]</span> <span class="pre">arg</span> <span class="pre">(=100000)</span></code></td>
+<td>Maximum number of kernels to
+profile.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">--xinitthreads</span></code></td>
+<td>Call XInitThreads at application startup. This can
+be a workaround for an assert that occurs when collecting performance
+counters. (Linux only)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="trace-summary-mode-options-for-tracesummary">
+<h3>Trace Summary mode options (for <code class="docutils literal"><span class="pre">--tracesummary</span></code>)<a class="headerlink" href="#trace-summary-mode-options-for-tracesummary" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">-a</span> <span class="pre">[</span> <span class="pre">--atpfile</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to the .atp file from which to generate
+summary pages. Optional when performing an API trace. Required if <code class="docutils literal"><span class="pre">-T</span></code> is
+specified when not performing an API trace. The handle of the kernel.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">-R</span> <span class="pre">[</span> <span class="pre">--apirulesfile</span> <span class="pre">]</span> <span class="pre">arg</span></code></td>
+<td>Path to OpenCL™ API analyzer configuration
+file. If not specified, all rules are enabled. Ignored when
+<code class="docutils literal"><span class="pre">-–tracesummary</span></code> is not specified.  See
+<a class="reference internal" href="configfiles.html#format-of-apirules-configuration-file"><span class="std std-ref">Format of API rules configuration file (argument passed to --apirulesfile)</span></a> for information about the
+configuration file format.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="occupancy-display-mode-options-for-occupancydisplay">
+<h3>Occupancy display mode options (for <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)<a class="headerlink" href="#occupancy-display-mode-options-for-occupancydisplay" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--occupancyindex</span></code></td>
+<td>Index of kernel to generate an occupancy display
+file for.  This is the index of the kernel within the .occupancy file
+specified as the occupancy configuration file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="example-command-lines">
+<h2>Example Command lines<a class="headerlink" href="#example-command-lines" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Collect default set of OpenCL™ performance counters:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--perfcounter</span> <span class="pre">&quot;/path/to/app.exe&quot;</span> <span class="pre">--device</span> <span class="pre">gpu</span></code></p>
+</li>
+<li><p class="first">Collect an OpenCL™ API trace:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--apitrace</span> <span class="pre">&quot;/path/to/app.exe&quot;</span> <span class="pre">--device</span> <span class="pre">gpu</span></code></p>
+</li>
+<li><p class="first">Collect kernel occupancy data for all OpenCL™ kernels dispatched:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--occupancy</span> <span class="pre">&quot;/path/to/app.exe&quot;</span> <span class="pre">--device</span> <span class="pre">gpu</span></code></p>
+</li>
+<li><p class="first">Collect default set of OpenCL™ performance counters and occupancy data:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--perfcounter</span> <span class="pre">--occupancy</span> <span class="pre">&quot;/path/to/app.exe&quot;</span> <span class="pre">--device</span> <span class="pre">gpu</span></code></p>
+</li>
+<li><p class="first">Collect an OpenCL™ API trace and occupancy data:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--apitrace</span> <span class="pre">--occupancy</span> <span class="pre">&quot;/path/to/app.exe&quot;</span> <span class="pre">--device</span> <span class="pre">gpu</span></code></p>
+</li>
+<li><p class="first">Collect an OpenCL™ API trace with summary pages:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">---apitrace</span> <span class="pre">--tracesummary</span> <span class="pre">&quot;/path/to/app.exe&quot;</span> <span class="pre">--device</span> <span class="pre">gpu</span></code></p>
+</li>
+<li><p class="first">Collect default set of HSA performance counters:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsapmc</span> <span class="pre">&quot;/path/to/app.exe&quot;</span></code></p>
+</li>
+<li><p class="first">Collect an HSA API trace:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsatrace</span> <span class="pre">&quot;/path/to/app.exe&quot;</span></code></p>
+</li>
+<li><p class="first">Collect default set of HSA performance counters and occupancy data:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsapmc</span> <span class="pre">--occupancy</span> <span class="pre">&quot;/path/to/app.exe&quot;</span></code></p>
+</li>
+<li><p class="first">Collect an HSA API trace with aql packets:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsaaqlpackettrace</span> <span class="pre">&quot;/path/to/app.exe&quot;</span></code></p>
+</li>
+<li><p class="first">Collect an HSA API trace with summary pages:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsatrace</span> <span class="pre">--tracesummary</span> <span class="pre">&quot;/path/to/app.exe&quot;</span></code>
+<code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsaaqlpackettrace</span> <span class="pre">--tracesummary</span> <span class="pre">&quot;/path/to/app.exe&quot;</span></code></p>
+</li>
+<li><p class="first">Generate summary pages from an .atp file:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--atpfile</span> <span class="pre">&quot;/path/to/output.atp&quot;</span> <span class="pre">--tracesummary</span></code></p>
+</li>
+<li><p class="first">Generate an occupancy display page for the entry at index 2 within the
+session.occupancy file:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--occupancydisplay</span> <span class="pre">&quot;/path/to/session.occupancy&quot;</span> <span class="pre">--occupancyindex</span> <span class="pre">2</span> <span class="pre">-o</span>
+<span class="pre">&quot;path/to/output.html&quot;</span></code></p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="perfcounters.html" class="btn btn-neutral float-right" title="Supported Performance Counters" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="using.html" class="btn btn-neutral" title="Using the Radeon Compute Profiler" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Advanced Micro Devices, Inc. All rights reserved.
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

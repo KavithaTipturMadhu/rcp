@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration Files &mdash; Radeon Compute Profiler 5.4 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Radeon Compute Profiler 5.4 documentation" href="index.html"/>
+        <link rel="next" title="Kernel Occupancy" href="occupancy.html"/>
+        <link rel="prev" title="Output Files" href="outputfiles.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Radeon Compute Profiler
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using the Radeon Compute Profiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using.html#application-trace-mode">Application Trace Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#performance-counter-mode">Performance Counter Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#additional-data">Additional Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#usage-model">Usage Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commandline.html">Command Line Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#general-usage">General Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#profile-mode-options">Profile Mode options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#application-trace-mode-options-for-apitrace-and-hsatrace-and-hsaaqlpackettrace">Application Trace mode options (for <code class="docutils literal"><span class="pre">--apitrace</span></code> and <code class="docutils literal"><span class="pre">-–hsatrace</span></code> and <code class="docutils literal"><span class="pre">--hsaaqlpackettrace</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#performance-counter-mode-options-for-perfcounter-and-hsapmc">Performance Counter mode options (for <code class="docutils literal"><span class="pre">--perfcounter</span></code>  and <code class="docutils literal"><span class="pre">--hsapmc</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#trace-summary-mode-options-for-tracesummary">Trace Summary mode options (for <code class="docutils literal"><span class="pre">--tracesummary</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#occupancy-display-mode-options-for-occupancydisplay">Occupancy display mode options (for <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#example-command-lines">Example Command lines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="perfcounters.html">Supported Performance Counters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputfiles.html">Output Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#performance-counter-output-session-name-csv">Performance Counter Output (SESSION_NAME.csv)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#application-trace-output-session-name-atp">Application Trace Output (SESSION_NAME.atp)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#api-trace-section">API Trace Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#timestamp-section">Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#hsa-kernel-timestamp-section">HSA Kernel Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#source-code-section">Source Code Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#perf-marker-section">Perf Marker Section</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#kernel-occupancy-output-session-name-occupancy">Kernel Occupancy Output (SESSION_NAME.occupancy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#format-of-counter-configuration-file-argument-passed-to-counterfile">Format of counter configuration file (argument passed to <code class="docutils literal"><span class="pre">--counterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-of-kernel-list-configuration-file-argument-passed-to-kernellistfile">Format of kernel list configuration file (argument passed to <code class="docutils literal"><span class="pre">--kernellistfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-of-api-rules-configuration-file-argument-passed-to-apirulesfile">Format of API rules configuration file (argument passed to <code class="docutils literal"><span class="pre">--apirulesfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-of-api-filter-configuration-file-argument-passed-to-apifilterfile">Format of API filter configuration file (argument passed to <code class="docutils literal"><span class="pre">--apifilterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-of-environment-variable-file-argument-passed-to-envvarfile">Format of environment variable file (argument passed to <code class="docutils literal"><span class="pre">--envvarfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#format-of-occupancy-display-configuration-file-argument-passed-to-occupancydisplay">Format of occupancy display configuration file (argument passed to <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="occupancy.html">Kernel Occupancy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="occupancy.html#kernel-occupancy-for-amd-radeon-hd-5000-6000-series-based-on-vliw5-vliw4-architecture">Kernel Occupancy for AMD Radeon™ HD 5000/6000 Series Based on VLIW5/VLIW4 Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#lds-limits-on-the-number-of-in-flight">1. LDS limits on the number of in-flight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#gpr-limits-on-the-number-of-in-flight-wavefronts">2. GPR limits on the number of in-flight wavefronts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#other-constraints">3. Other constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="occupancy.html#kernel-occupancy-for-amd-radeon-hd-7000-series-or-newer-based-on-graphics-core-next-architecture">Kernel Occupancy for AMD Radeon™ HD 7000 Series or Newer, Based on Graphics Core Next Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How Do I…</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-import-profiler-data-into-codexl-for-viewing">How do I import profiler data into CodeXL for viewing?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-collect-a-full-set-of-performance-counters-for-my-application">How do I collect a full set of Performance Counters for my application?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-counter-files-to-pass-to-the-counterfile-switch">How do I generate counter files to pass to the <code class="docutils literal"><span class="pre">--counterfile</span></code> switch?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-determine-how-many-passes-are-required-for-a-set-of-counters">How do I determine how many passes are required for a set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-a-set-of-single-pass-counter-files-from-a-given-set-of-counters">How do I generate a set of single-pass counter files from a given set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-force-a-single-pass-profile">How do I force a single-pass profile?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-limit-the-amount-of-profiling-data-generated">How do I limit the amount of profiling data generated?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#general-features-for-limiting-profiling-data">General features for limiting profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#features-specific-to-application-trace-mode">Features specific to Application Trace mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#features-specific-to-performance-counter-mode">Features specific to Performance Counter mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-html-summary-pages">How do I generate HTML Summary Pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-specify-which-rules-should-be-used-when-generating-summary-pages">How do I specify which rules should be used when generating Summary pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-find-out-which-source-code-called-a-particular-api-call-in-the-application-trace-file-atp-file">How do I find out which source code called a particular API call in the Application Trace file (.atp file)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-a-kernel-occupancy-display-html-file">How do I generate a Kernel Occupancy Display HTML file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-annotate-the-timeline-data-with-application-specific-events">How do I annotate the timeline data with application specific events?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-collect-gpu-performance-counters-directly-from-my-application-without-using-the-profiler">How do I collect GPU Performance Counters directly from my application without using the profiler?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-ensure-that-my-opencl-application-trace-contains-all-api-trace-data">How do I ensure that my OpenCL application trace contains all API trace data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-report-an-issue-with-radeon-compute-profiler">How do I report an issue with Radeon Compute Profiler</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Radeon Compute Profiler</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Configuration Files</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="configuration-files">
+<h1>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="format-of-counter-configuration-file-argument-passed-to-counterfile">
+<span id="format-of-counter-configuration-file"></span><h2>Format of counter configuration file (argument passed to <code class="docutils literal"><span class="pre">--counterfile</span></code>)<a class="headerlink" href="#format-of-counter-configuration-file-argument-passed-to-counterfile" title="Permalink to this headline">¶</a></h2>
+<p>To specify a set of performance counters to enable when profiling from the
+command line, pass the name of a configuration file to the <code class="docutils literal"><span class="pre">--counterfile</span></code>
+option. The format of this configuration file is one counter name per line.
+Counter names are case-sensitive. You can generate a set of counter files
+containing every available counter using the following command line:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--list</span> <span class="pre">--outputfile</span> <span class="pre">counters.txt</span></code></div>
+<div class="line"><br /></div>
+</div>
+<p>An example of the contents of this file is given below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Wavefronts</span>
+<span class="n">VALUInsts</span>
+<span class="n">SALUInsts</span>
+<span class="n">VFetchInsts</span>
+<span class="n">SFetchInsts</span>
+<span class="n">VWriteInsts</span>
+<span class="n">LDSInsts</span>
+<span class="n">GDSInsts</span>
+<span class="n">VALUUtilization</span>
+<span class="n">VALUBusy</span>
+<span class="n">SALUBusy</span>
+<span class="n">FetchSize</span>
+<span class="n">WriteSize</span>
+<span class="n">L1CacheHit</span>
+<span class="n">L1CacheHit</span>
+<span class="n">MemUnitBusy</span>
+<span class="n">MemUnitStalled</span>
+<span class="n">WriteUnitStalled</span>
+<span class="n">LDSBankConflict</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format-of-kernel-list-configuration-file-argument-passed-to-kernellistfile">
+<span id="format-of-kernellist-configuration-file"></span><h2>Format of kernel list configuration file (argument passed to <code class="docutils literal"><span class="pre">--kernellistfile</span></code>)<a class="headerlink" href="#format-of-kernel-list-configuration-file-argument-passed-to-kernellistfile" title="Permalink to this headline">¶</a></h2>
+<p>To specify a set of kernels to profile when collecting performance counters
+from the command line, pass the name of a configuration file to the
+<code class="docutils literal"><span class="pre">--kernellistfile</span></code> option. The format of this configuration file is one
+kernel name per line. Kernel names are case-sensitive.  When specified, any
+kernels dispatched by the application that are not contained in the kernel list
+configuration file will not be profiled.</p>
+<p>An example of the contents of this file is given below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MatrixMultiplyKernel</span>
+<span class="n">binarySearch</span>
+<span class="n">binomial_options</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format-of-api-rules-configuration-file-argument-passed-to-apirulesfile">
+<span id="format-of-apirules-configuration-file"></span><h2>Format of API rules configuration file (argument passed to <code class="docutils literal"><span class="pre">--apirulesfile</span></code>)<a class="headerlink" href="#format-of-api-rules-configuration-file-argument-passed-to-apirulesfile" title="Permalink to this headline">¶</a></h2>
+<p>To specify a set of rules to use when generating the summary pages from a trace
+file when using the command line, pass the name of a configuration file to the
+<code class="docutils literal"><span class="pre">--apirulesfile</span></code> option. The format of this file is one rule per line in the
+<code class="docutils literal"><span class="pre">NAME=VALUE</span></code> format. Note that the “VALUE” can be either “True” or “False”.</p>
+<p>An example of the contents of this file is given below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">RefTracker</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">BlockingWrite</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">BadWorkGroupSize</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">RetCodeAnalyzer</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">DataTransferAnalyzer</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">SyncAnalyzer</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">APITrace</span><span class="o">.</span><span class="n">APIRules</span><span class="o">.</span><span class="n">DeprecatedFunctionAnalyzer</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format-of-api-filter-configuration-file-argument-passed-to-apifilterfile">
+<span id="format-of-apifilter-configuration-file"></span><h2>Format of API filter configuration file (argument passed to <code class="docutils literal"><span class="pre">--apifilterfile</span></code>)<a class="headerlink" href="#format-of-api-filter-configuration-file-argument-passed-to-apifilterfile" title="Permalink to this headline">¶</a></h2>
+<p>To ignore a set of APIs when collecting an API trace using the command line,
+pass the name of a configuration file to the <code class="docutils literal"><span class="pre">--apifilterfile</span></code> option. The
+format of this file is one API name per line.</p>
+<p>An example of the contents of this file  for an OpenCL™ is given below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clGetPlatformIDs</span>
+<span class="n">clGetPlatformInfo</span>
+<span class="n">clGetDeviceIDs</span>
+<span class="n">clGetDeviceInfo</span>
+<span class="n">clGetContextInfo</span>
+<span class="n">clGetCommandQueueInfo</span>
+<span class="n">clGetSupportedImageFormats</span>
+<span class="n">clGetMemObjectInfo</span>
+<span class="n">clGetImageInfo</span>
+<span class="n">clGetSamplerInfo</span>
+<span class="n">clGetProgramInfo</span>
+<span class="n">clGetProgramBuildInfo</span>
+<span class="n">clGetKernelInfo</span>
+<span class="n">clGetKernelWorkGroupInfo</span>
+<span class="n">clGetEventInfo</span>
+<span class="n">clGetEventProfilingInfo</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format-of-environment-variable-file-argument-passed-to-envvarfile">
+<span id="format-of-envvar-configuration-file"></span><h2>Format of environment variable file (argument passed to <code class="docutils literal"><span class="pre">--envvarfile</span></code>)<a class="headerlink" href="#format-of-environment-variable-file-argument-passed-to-envvarfile" title="Permalink to this headline">¶</a></h2>
+<p>To specify a set of environment variables to be defined for the application
+being profiled, pass the name of a configuration file to the <code class="docutils literal"><span class="pre">--envvarfile</span></code>
+option. The format of this file is one environment variable per line in the
+<code class="docutils literal"><span class="pre">NAME=VALUE</span></code> format.</p>
+<p>An example of the contents of this file is given below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">APPLICATION_DATA_DIR</span><span class="o">=</span><span class="n">c</span><span class="p">:</span>\<span class="n">path</span>\<span class="n">to</span>\<span class="n">app</span>\<span class="n">data</span>
+<span class="n">DEBUG_FLAG</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">LOG_FILE</span><span class="o">=</span><span class="n">c</span><span class="p">:</span>\<span class="n">temp</span>\<span class="n">logfile</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="format-of-occupancy-display-configuration-file-argument-passed-to-occupancydisplay">
+<span id="format-of-occdisplay-configuration-file"></span><h2>Format of occupancy display configuration file (argument passed to <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)<a class="headerlink" href="#format-of-occupancy-display-configuration-file-argument-passed-to-occupancydisplay" title="Permalink to this headline">¶</a></h2>
+<p>A Kernel Occupancy HTML display file can be generated in one of two ways. Both
+involve passing a file to the <code class="docutils literal"><span class="pre">--occupancydisplay</span></code> switch.</p>
+<p>The first way to generate the HTML file is to pass a previously-generated
+.occupancy file to <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>. This must be used in conjunction with
+the <code class="docutils literal"><span class="pre">--occupancyindex</span></code> switch to specify which occupancy data from the specified
+.occupancy file should be used to generate the display file. The argument
+passed to <code class="docutils literal"><span class="pre">--occupancyindex</span></code> is a zero-based index.</p>
+<p>The second way is a legacy path which involves passing a file manually
+generated from an .occupancy file. The format of this configuration file is one
+parameter per line in the <code class="docutils literal"><span class="pre">NAME=VALUE</span></code> format. The “VALUES” are taken from a
+generated .occupancy file for a particular kernel.</p>
+<p>An example of the contents of this file is given below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ThreadID</span><span class="o">=</span><span class="mi">3364</span>
+<span class="n">CallIndex</span><span class="o">=</span><span class="mi">101</span>
+<span class="n">KernelName</span><span class="o">=</span><span class="n">reduce</span>
+<span class="n">DeviceName</span><span class="o">=</span><span class="n">Capeverde</span>
+<span class="n">ComputeUnits</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">MaxWavesPerComputeUnit</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">MaxWorkGroupPerComputeUnit</span><span class="o">=</span><span class="mi">16</span>
+<span class="n">MaxVGPRs</span><span class="o">=</span><span class="mi">256</span>
+<span class="n">MaxSGPRs</span><span class="o">=</span><span class="mi">512</span>
+<span class="n">MaxLDS</span><span class="o">=</span><span class="mi">32768</span>
+<span class="n">UsedVGPRs</span><span class="o">=</span><span class="mi">11</span>
+<span class="n">UsedSGPRs</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">UsedLDS</span><span class="o">=</span><span class="mi">4096</span>
+<span class="n">WavefrontSize</span><span class="o">=</span><span class="mi">64</span>
+<span class="n">WorkGroupSize</span><span class="o">=</span><span class="mi">256</span>
+<span class="n">WavesPerWorkGroup</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">MaxWorkGroupSize</span><span class="o">=</span><span class="mi">256</span>
+<span class="n">MaxWavesPerWorkGroup</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">GlobalWorkSize</span><span class="o">=</span><span class="mi">256</span>
+<span class="n">MaxGlobalWorkSize</span><span class="o">=</span><span class="mi">16777216</span>
+<span class="n">WavesLimitedByVGPR</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">WavesLimitedBySGPR</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">WavesLimitedByLDS</span><span class="o">=</span><span class="mi">32</span>
+<span class="n">WavesLimitedByWorkgroup</span><span class="o">=</span><span class="mi">40</span>
+<span class="n">Occupancy</span><span class="o">=</span><span class="mi">80</span>
+<span class="n">DeviceGfxIpVer</span><span class="o">=</span><span class="mi">6</span>
+<span class="n">SimdsPerCU</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+<p>This second method is currently used by the CodeXL UI. It is much easier to use
+the first method when manually generating Occupancy Display files using the
+profiler command line.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="occupancy.html" class="btn btn-neutral float-right" title="Kernel Occupancy" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="outputfiles.html" class="btn btn-neutral" title="Output Files" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Advanced Micro Devices, Inc. All rights reserved.
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

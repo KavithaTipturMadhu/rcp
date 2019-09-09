@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How Do I… &mdash; Radeon Compute Profiler 5.4 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Radeon Compute Profiler 5.4 documentation" href="index.html"/>
+        <link rel="prev" title="Kernel Occupancy" href="occupancy.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Radeon Compute Profiler
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using the Radeon Compute Profiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using.html#application-trace-mode">Application Trace Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#performance-counter-mode">Performance Counter Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#additional-data">Additional Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#usage-model">Usage Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commandline.html">Command Line Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#general-usage">General Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#profile-mode-options">Profile Mode options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#application-trace-mode-options-for-apitrace-and-hsatrace-and-hsaaqlpackettrace">Application Trace mode options (for <code class="docutils literal"><span class="pre">--apitrace</span></code> and <code class="docutils literal"><span class="pre">-–hsatrace</span></code> and <code class="docutils literal"><span class="pre">--hsaaqlpackettrace</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#performance-counter-mode-options-for-perfcounter-and-hsapmc">Performance Counter mode options (for <code class="docutils literal"><span class="pre">--perfcounter</span></code>  and <code class="docutils literal"><span class="pre">--hsapmc</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#trace-summary-mode-options-for-tracesummary">Trace Summary mode options (for <code class="docutils literal"><span class="pre">--tracesummary</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#occupancy-display-mode-options-for-occupancydisplay">Occupancy display mode options (for <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#example-command-lines">Example Command lines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="perfcounters.html">Supported Performance Counters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputfiles.html">Output Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#performance-counter-output-session-name-csv">Performance Counter Output (SESSION_NAME.csv)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#application-trace-output-session-name-atp">Application Trace Output (SESSION_NAME.atp)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#api-trace-section">API Trace Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#timestamp-section">Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#hsa-kernel-timestamp-section">HSA Kernel Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#source-code-section">Source Code Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#perf-marker-section">Perf Marker Section</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#kernel-occupancy-output-session-name-occupancy">Kernel Occupancy Output (SESSION_NAME.occupancy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-counter-configuration-file-argument-passed-to-counterfile">Format of counter configuration file (argument passed to <code class="docutils literal"><span class="pre">--counterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-kernel-list-configuration-file-argument-passed-to-kernellistfile">Format of kernel list configuration file (argument passed to <code class="docutils literal"><span class="pre">--kernellistfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-api-rules-configuration-file-argument-passed-to-apirulesfile">Format of API rules configuration file (argument passed to <code class="docutils literal"><span class="pre">--apirulesfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-api-filter-configuration-file-argument-passed-to-apifilterfile">Format of API filter configuration file (argument passed to <code class="docutils literal"><span class="pre">--apifilterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-environment-variable-file-argument-passed-to-envvarfile">Format of environment variable file (argument passed to <code class="docutils literal"><span class="pre">--envvarfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-occupancy-display-configuration-file-argument-passed-to-occupancydisplay">Format of occupancy display configuration file (argument passed to <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="occupancy.html">Kernel Occupancy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="occupancy.html#kernel-occupancy-for-amd-radeon-hd-5000-6000-series-based-on-vliw5-vliw4-architecture">Kernel Occupancy for AMD Radeon™ HD 5000/6000 Series Based on VLIW5/VLIW4 Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#lds-limits-on-the-number-of-in-flight">1. LDS limits on the number of in-flight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#gpr-limits-on-the-number-of-in-flight-wavefronts">2. GPR limits on the number of in-flight wavefronts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="occupancy.html#other-constraints">3. Other constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="occupancy.html#kernel-occupancy-for-amd-radeon-hd-7000-series-or-newer-based-on-graphics-core-next-architecture">Kernel Occupancy for AMD Radeon™ HD 7000 Series or Newer, Based on Graphics Core Next Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How Do I…</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-import-profiler-data-into-codexl-for-viewing">How do I import profiler data into CodeXL for viewing?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-collect-a-full-set-of-performance-counters-for-my-application">How do I collect a full set of Performance Counters for my application?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-generate-counter-files-to-pass-to-the-counterfile-switch">How do I generate counter files to pass to the <code class="docutils literal"><span class="pre">--counterfile</span></code> switch?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-determine-how-many-passes-are-required-for-a-set-of-counters">How do I determine how many passes are required for a set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-generate-a-set-of-single-pass-counter-files-from-a-given-set-of-counters">How do I generate a set of single-pass counter files from a given set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-force-a-single-pass-profile">How do I force a single-pass profile?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-limit-the-amount-of-profiling-data-generated">How do I limit the amount of profiling data generated?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#general-features-for-limiting-profiling-data">General features for limiting profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features-specific-to-application-trace-mode">Features specific to Application Trace mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features-specific-to-performance-counter-mode">Features specific to Performance Counter mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-generate-html-summary-pages">How do I generate HTML Summary Pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-specify-which-rules-should-be-used-when-generating-summary-pages">How do I specify which rules should be used when generating Summary pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-find-out-which-source-code-called-a-particular-api-call-in-the-application-trace-file-atp-file">How do I find out which source code called a particular API call in the Application Trace file (.atp file)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-generate-a-kernel-occupancy-display-html-file">How do I generate a Kernel Occupancy Display HTML file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-annotate-the-timeline-data-with-application-specific-events">How do I annotate the timeline data with application specific events?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-collect-gpu-performance-counters-directly-from-my-application-without-using-the-profiler">How do I collect GPU Performance Counters directly from my application without using the profiler?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-ensure-that-my-opencl-application-trace-contains-all-api-trace-data">How do I ensure that my OpenCL application trace contains all API trace data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-do-i-report-an-issue-with-radeon-compute-profiler">How do I report an issue with Radeon Compute Profiler</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Radeon Compute Profiler</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>How Do I…</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="how-do-i">
+<span id="how-to"></span><h1>How Do I…<a class="headerlink" href="#how-do-i" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-do-i-import-profiler-data-into-codexl-for-viewing">
+<h2>How do I import profiler data into CodeXL for viewing?<a class="headerlink" href="#how-do-i-import-profiler-data-into-codexl-for-viewing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>CodeXL can be downloaded and installed from
+<a class="reference external" href="https://github.com/GPUOpen-Tools/CodeXL/releases">https://github.com/GPUOpen-Tools/CodeXL/releases</a></li>
+<li>Once it is installed, launch the CodeXL interface</li>
+<li>Create a new project using the <strong>File-&gt;New Project</strong> menu item</li>
+<li>Switch to Profile Mode using the <strong>Profile-&gt;Switch to Profile mode</strong> menu
+item</li>
+<li>In the CodeXL Explorer window, right click with the mouse and select the
+<strong>Import Session</strong> menu item.</li>
+<li>Navigate to the location of the .atp or .csv file that you want to import</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>The file will be imported and the data will be displayed</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="how-do-i-collect-a-full-set-of-performance-counters-for-my-application">
+<h2>How do I collect a full set of Performance Counters for my application?<a class="headerlink" href="#how-do-i-collect-a-full-set-of-performance-counters-for-my-application" title="Permalink to this headline">¶</a></h2>
+<p>The full set of available performance counters cannot be collected at the same
+time. This is due to a limited number of GPU hardware registers that support
+the collection of performance counters.</p>
+<p>For most OpenCL applications, the Radeon Compute Profiler is able to reliably
+replay individual kernel dispatches so that the full set of performance
+counters can be collected for each dispatch. However, for some dispatches, the
+profiler is not able to do this (two examples are kernels that take SVM
+arguments and kernels that use pipes). This is also the case for all ROCm/HSA
+dispatches.</p>
+<p>The profiler has support for an alternate method of collecting a full set of
+performance counters, which can be used in many cases where individual kernel
+replay is not an option. This method is referred to as whole-application replay
+and as the name implies, it involves running the entire application more than
+once and collecting a different set of performance counters each time.</p>
+<p>This method only works well for applications that run deterministically from
+one run to the next – the same kernels must be dispatched in the same order
+with the same arguments each time you run the application.</p>
+<p>To use this mode, you should specify more than one counter file when executing
+the profiler. You do this by including more that one <code class="docutils literal"><span class="pre">--counterfile</span></code> argument
+on the profiler command line.  A simple example command line would be:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--hsapmc</span> <span class="pre">--counterfile</span> <span class="pre">counterfile_pass1.txt</span> <span class="pre">--counterfile</span>
+<span class="pre">counterfile_pass2.txt</span> <span class="pre">Application</span></code></p>
+<p>When running using the above mode, the application will be executed twice in
+its entirety. The first time, the counters from <code class="docutils literal"><span class="pre">counterfile_pass1.txt</span></code> will
+be collected. The second time, the counters from <code class="docutils literal"><span class="pre">counterfile_pass2.txt</span></code> will
+be collected. After both application executions, the profiler will then collate
+the results of the two runs into a single output .csv file.</p>
+</div>
+<div class="section" id="how-do-i-generate-counter-files-to-pass-to-the-counterfile-switch">
+<h2>How do I generate counter files to pass to the <code class="docutils literal"><span class="pre">--counterfile</span></code> switch?<a class="headerlink" href="#how-do-i-generate-counter-files-to-pass-to-the-counterfile-switch" title="Permalink to this headline">¶</a></h2>
+<p>Counter files containing the full set of support performance counters can be
+generated using the following command line:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--list</span> <span class="pre">--outputfile</span> <span class="pre">counterfile.txt</span></code></p>
+<p>Several counter files will be generated, one for each supported hardware family
+for both OpenCL and ROCm/HSA profiling.</p>
+<p>Single-pass counter files (those containing sets of counters that can be
+collected in a single pass) can be generated for the hardware available on the
+target machine using the following command line:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--list</span> <span class="pre">--outputfile</span> <span class="pre">counterfile.txt</span> <span class="pre">--maxpassperfile</span> <span class="pre">1</span></code></p>
+</div>
+<div class="section" id="how-do-i-determine-how-many-passes-are-required-for-a-set-of-counters">
+<h2>How do I determine how many passes are required for a set of counters?<a class="headerlink" href="#how-do-i-determine-how-many-passes-are-required-for-a-set-of-counters" title="Permalink to this headline">¶</a></h2>
+<p>Once you have a counter file with the set of counters you wish to collect, you
+can determine the number of passes required using the following command line:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--counterfile</span> <span class="pre">counterfile.txt</span> <span class="pre">--numberofpass</span></code></p>
+</div>
+<div class="section" id="how-do-i-generate-a-set-of-single-pass-counter-files-from-a-given-set-of-counters">
+<h2>How do I generate a set of single-pass counter files from a given set of counters?<a class="headerlink" href="#how-do-i-generate-a-set-of-single-pass-counter-files-from-a-given-set-of-counters" title="Permalink to this headline">¶</a></h2>
+<p>Assuming you have a counter file containing a set of counters that require more
+than one pass, you can have the profiler split that set of counters into
+multiple single-pass counter files for the hardware available on the target
+machine using the following command line:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--list</span> <span class="pre">--counterfile</span> <span class="pre">counterfile.txt</span> <span class="pre">--maxpassperfile</span> <span class="pre">1</span> <span class="pre">--outputfile</span> <span class="pre">singlepasscounters.txt</span></code></p>
+</div>
+<div class="section" id="how-do-i-force-a-single-pass-profile">
+<h2>How do I force a single-pass profile?<a class="headerlink" href="#how-do-i-force-a-single-pass-profile" title="Permalink to this headline">¶</a></h2>
+<p>You can instruct the profiler to only collect performance counter data that
+can be collected in a single pass by adding the <code class="docutils literal"><span class="pre">--singlepass</span></code> switch to the
+rcprof command line. This switch causes the profiler to use a counter set that
+can be collected in a single pass. For OpenCL profiling, this also prevents the
+profiler from collecting timing data for each dispatch, as timing data requires
+a separate pass.</p>
+<p>Alternatively, you can reduce the number of passes required for OpenCL
+profiling by adding the <code class="docutils literal"><span class="pre">--nogputime</span></code> switch to the rcprof command line. This
+switch prevents the profiler from collecting timing data for OpenCL kernels.</p>
+</div>
+<div class="section" id="how-do-i-limit-the-amount-of-profiling-data-generated">
+<h2>How do I limit the amount of profiling data generated?<a class="headerlink" href="#how-do-i-limit-the-amount-of-profiling-data-generated" title="Permalink to this headline">¶</a></h2>
+<p>When profiling some applications, the default settings used by the profiler can
+lead to generation of a lot of data. Sometimes it can be useful to limit the
+amount of data generated so you can easily narrow in on particular parts of your
+application. The Radeon Compute Profiler has several features which can be used
+to limit the amount of profiling data generated.</p>
+<div class="section" id="general-features-for-limiting-profiling-data">
+<h3>General features for limiting profiling data<a class="headerlink" href="#general-features-for-limiting-profiling-data" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--startdelay</span> <span class="pre">X</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Runs the application, but does not start collecting profiling data until the
+specified start delay  (in milliseconds) passes.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--profileduration</span> <span class="pre">X</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Runs the application, and stops collecting profiling data after the
+specified duration  (in milliseconds) passes.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--startdisabled</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Runs the application, but does not collect any profiling data until the
+application calls one of the ActivityLogger entry points to resume
+profiling.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>ActivityLogger instrumentation</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>The ActivityLogger library can be used to instrument an application to
+control which parts of the application generate profiling data.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="features-specific-to-application-trace-mode">
+<h3>Features specific to Application Trace mode<a class="headerlink" href="#features-specific-to-application-trace-mode" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--apifilterfile</span> <span class="pre">filename</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Specifies a file which contains a list of APIs to exclude from the output.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--maxapicalls</span> <span class="pre">X</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Specifies the maximum number of API calls to include in the output (default
+is one million).</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="features-specific-to-performance-counter-mode">
+<h3>Features specific to Performance Counter mode<a class="headerlink" href="#features-specific-to-performance-counter-mode" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--kernellistfile</span> <span class="pre">filename</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Specifies a file which contains a list of kernel names to include when
+profiling. Only kernels whose names match names in the file will be profiled.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--maxkernels</span> <span class="pre">X</span></code> switch</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Specifies the maximum number of kernels to profile. Once the limit is
+reached, additional kernel dispatches will not be profiled.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="how-do-i-generate-html-summary-pages">
+<h2>How do I generate HTML Summary Pages?<a class="headerlink" href="#how-do-i-generate-html-summary-pages" title="Permalink to this headline">¶</a></h2>
+<p>Summary pages can be generated at the same time an Application Trace profile is
+performed by adding the <code class="docutils literal"><span class="pre">--tracesummary</span></code> switch to the rcprof command line.</p>
+<p>Summary pages can be generated from a previously-generated .atp file using the
+following command line:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--tracesummary</span> <span class="pre">--atpfile</span> <span class="pre">filename.atp</span></code></p>
+</div>
+<div class="section" id="how-do-i-specify-which-rules-should-be-used-when-generating-summary-pages">
+<h2>How do I specify which rules should be used when generating Summary pages?<a class="headerlink" href="#how-do-i-specify-which-rules-should-be-used-when-generating-summary-pages" title="Permalink to this headline">¶</a></h2>
+<p>By default, all rules are used when generating the BestPractices Summary page.
+In order to specify a set of rules, you can pass a configuration file to the
+<code class="docutils literal"><span class="pre">--apirulesfile</span></code> switch.</p>
+<p>Sample command lines are:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--tracesummary</span> <span class="pre">--apirulesfile</span> <span class="pre">rulesfile.txt</span> <span class="pre">--apitrace</span> <span class="pre">Application</span></code>
+<code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--tracesummary</span> <span class="pre">--apirulesfile</span> <span class="pre">rulesfile.txt</span> <span class="pre">--atpfile</span> <span class="pre">filename.atp</span></code></p>
+<p>See <a class="reference internal" href="configfiles.html#format-of-apirules-configuration-file"><span class="std std-ref">Format of API rules configuration file (argument passed to --apirulesfile)</span></a> for more information on the
+expected contents in the rules file.</p>
+</div>
+<div class="section" id="how-do-i-find-out-which-source-code-called-a-particular-api-call-in-the-application-trace-file-atp-file">
+<h2>How do I find out which source code called a particular API call in the Application Trace file (.atp file)?<a class="headerlink" href="#how-do-i-find-out-which-source-code-called-a-particular-api-call-in-the-application-trace-file-atp-file" title="Permalink to this headline">¶</a></h2>
+<p>When collecting an application trace, you can ask the profiler to also collect
+information about the call location for each API called. To do this, add the
+<code class="docutils literal"><span class="pre">--sym</span></code> switch to the rcprof command line. With this switch, the profiler
+will include a new section in the .atp file that contains the source location
+of the call for each API. If the application is built with debug information
+this location will be expressed in terms of source file and line number. If no
+debug information is available, then the location will be expressed as a code
+address.</p>
+<p>Note: Using the <code class="docutils literal"><span class="pre">--sym</span></code> switch can add significant overhead when profiling.</p>
+<p>If you import an .atp which was generated with the <code class="docutils literal"><span class="pre">--sym</span></code> switch into
+CodeXL, the CodeXL UI will allow you to navigate from the API trace to the
+source code for the call location.</p>
+</div>
+<div class="section" id="how-do-i-generate-a-kernel-occupancy-display-html-file">
+<h2>How do I generate a Kernel Occupancy Display HTML file?<a class="headerlink" href="#how-do-i-generate-a-kernel-occupancy-display-html-file" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="configfiles.html#format-of-occdisplay-configuration-file"><span class="std std-ref">Format of occupancy display configuration file (argument passed to --occupancydisplay)</span></a> for information on how to
+generate a Kernel Occupancy Display file.</p>
+<p>As an example, the following command line will create a file called
+occupancy2.html for the second item in the specified session.occupancy
+input file:</p>
+<p><code class="docutils literal"><span class="pre">rcprof</span> <span class="pre">--occupancydisplay</span> <span class="pre">session.occupancy</span> <span class="pre">--occupancyindex</span> <span class="pre">2</span> <span class="pre">-o</span>
+<span class="pre">occupancy2.html</span></code></p>
+</div>
+<div class="section" id="how-do-i-annotate-the-timeline-data-with-application-specific-events">
+<h2>How do I annotate the timeline data with application specific events?<a class="headerlink" href="#how-do-i-annotate-the-timeline-data-with-application-specific-events" title="Permalink to this headline">¶</a></h2>
+<p>The Radeon Computer Profiler comes with the AMDTActivityLogger library. This
+library provides a simple instrumentation API that allows users to instrument
+their code with calls which can be used by Radeon Compute Profiler to annotate
+the data in the .atp file generated when collecting an Application Trace. See
+the <a class="reference external" href="https://github.com/GPUOpen-Tools/common-src-AMDTActivityLogger/blob/master/Doc/AMDTActivityLogger.pdf">Activity Logger documentation</a>
+for information on using this library.</p>
+</div>
+<div class="section" id="how-do-i-collect-gpu-performance-counters-directly-from-my-application-without-using-the-profiler">
+<h2>How do I collect GPU Performance Counters directly from my application without using the profiler?<a class="headerlink" href="#how-do-i-collect-gpu-performance-counters-directly-from-my-application-without-using-the-profiler" title="Permalink to this headline">¶</a></h2>
+<p>GPUPerfAPI, the library used by Radeon Compute Profiler to collect GPU
+performance counters can be used directly by an application to collect
+performance counter data at runtime. GPUPerfAPI can be found at
+<a class="reference external" href="https://github.com/GPUOpen-Tools/GPA">https://github.com/GPUOpen-Tools/GPA</a>.</p>
+</div>
+<div class="section" id="how-do-i-ensure-that-my-opencl-application-trace-contains-all-api-trace-data">
+<h2>How do I ensure that my OpenCL application trace contains all API trace data?<a class="headerlink" href="#how-do-i-ensure-that-my-opencl-application-trace-contains-all-api-trace-data" title="Permalink to this headline">¶</a></h2>
+<p>When the the <code class="docutils literal"><span class="pre">--interval</span></code> command line switch is used (which is the default
+and only supported mode on Linux), the application trace might not include the
+full trace of all APIs called by the application. This is because any APIs
+called after the final interval in the application’s lifetime might be omitted.
+To limit the number of APIs omitted in this scenario, the Profiler also writes
+all queued-up trace data when the clReleaseContext API is called. However, if
+an application does not call clReleaseContext to clean up any OpenCL contexts
+it has created, or if it calls any OpenCL? APIs after the final
+clReleaseContext call, then the trace might not contain all APIs called. To
+prevent this from happening, it is recommended that clReleaseContext is the
+last OpenCL API called by the application when it is running.</p>
+</div>
+<div class="section" id="how-do-i-report-an-issue-with-radeon-compute-profiler">
+<h2>How do I report an issue with Radeon Compute Profiler<a class="headerlink" href="#how-do-i-report-an-issue-with-radeon-compute-profiler" title="Permalink to this headline">¶</a></h2>
+<p>Please use the <a class="reference external" href="https://github.com/GPUOpen-Tools/RCP/issues">GitHub Issues page</a> to report any issues or to
+request enhancements to the Radeon Compute Profiler.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="occupancy.html" class="btn btn-neutral" title="Kernel Occupancy" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Advanced Micro Devices, Inc. All rights reserved.
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

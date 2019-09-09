@@ -1,0 +1,432 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kernel Occupancy &mdash; Radeon Compute Profiler 5.4 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Radeon Compute Profiler 5.4 documentation" href="index.html"/>
+        <link rel="next" title="How Do I…" href="howto.html"/>
+        <link rel="prev" title="Configuration Files" href="configfiles.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="index.html" class="icon icon-home"> Radeon Compute Profiler
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">Using the Radeon Compute Profiler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using.html#application-trace-mode">Application Trace Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#performance-counter-mode">Performance Counter Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#additional-data">Additional Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using.html#usage-model">Usage Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commandline.html">Command Line Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#general-usage">General Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#profile-mode-options">Profile Mode options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#general-options">General options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#application-trace-mode-options-for-apitrace-and-hsatrace-and-hsaaqlpackettrace">Application Trace mode options (for <code class="docutils literal"><span class="pre">--apitrace</span></code> and <code class="docutils literal"><span class="pre">-–hsatrace</span></code> and <code class="docutils literal"><span class="pre">--hsaaqlpackettrace</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#performance-counter-mode-options-for-perfcounter-and-hsapmc">Performance Counter mode options (for <code class="docutils literal"><span class="pre">--perfcounter</span></code>  and <code class="docutils literal"><span class="pre">--hsapmc</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#trace-summary-mode-options-for-tracesummary">Trace Summary mode options (for <code class="docutils literal"><span class="pre">--tracesummary</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commandline.html#occupancy-display-mode-options-for-occupancydisplay">Occupancy display mode options (for <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commandline.html#example-command-lines">Example Command lines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="perfcounters.html">Supported Performance Counters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="outputfiles.html">Output Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#performance-counter-output-session-name-csv">Performance Counter Output (SESSION_NAME.csv)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#application-trace-output-session-name-atp">Application Trace Output (SESSION_NAME.atp)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#api-trace-section">API Trace Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#timestamp-section">Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#hsa-kernel-timestamp-section">HSA Kernel Timestamp Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#source-code-section">Source Code Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outputfiles.html#perf-marker-section">Perf Marker Section</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="outputfiles.html#kernel-occupancy-output-session-name-occupancy">Kernel Occupancy Output (SESSION_NAME.occupancy)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configfiles.html">Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-counter-configuration-file-argument-passed-to-counterfile">Format of counter configuration file (argument passed to <code class="docutils literal"><span class="pre">--counterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-kernel-list-configuration-file-argument-passed-to-kernellistfile">Format of kernel list configuration file (argument passed to <code class="docutils literal"><span class="pre">--kernellistfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-api-rules-configuration-file-argument-passed-to-apirulesfile">Format of API rules configuration file (argument passed to <code class="docutils literal"><span class="pre">--apirulesfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-api-filter-configuration-file-argument-passed-to-apifilterfile">Format of API filter configuration file (argument passed to <code class="docutils literal"><span class="pre">--apifilterfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-environment-variable-file-argument-passed-to-envvarfile">Format of environment variable file (argument passed to <code class="docutils literal"><span class="pre">--envvarfile</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configfiles.html#format-of-occupancy-display-configuration-file-argument-passed-to-occupancydisplay">Format of occupancy display configuration file (argument passed to <code class="docutils literal"><span class="pre">--occupancydisplay</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kernel Occupancy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-occupancy-for-amd-radeon-hd-5000-6000-series-based-on-vliw5-vliw4-architecture">Kernel Occupancy for AMD Radeon™ HD 5000/6000 Series Based on VLIW5/VLIW4 Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lds-limits-on-the-number-of-in-flight">1. LDS limits on the number of in-flight</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gpr-limits-on-the-number-of-in-flight-wavefronts">2. GPR limits on the number of in-flight wavefronts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-constraints">3. Other constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-occupancy-for-amd-radeon-hd-7000-series-or-newer-based-on-graphics-core-next-architecture">Kernel Occupancy for AMD Radeon™ HD 7000 Series or Newer, Based on Graphics Core Next Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">How Do I…</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-import-profiler-data-into-codexl-for-viewing">How do I import profiler data into CodeXL for viewing?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-collect-a-full-set-of-performance-counters-for-my-application">How do I collect a full set of Performance Counters for my application?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-counter-files-to-pass-to-the-counterfile-switch">How do I generate counter files to pass to the <code class="docutils literal"><span class="pre">--counterfile</span></code> switch?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-determine-how-many-passes-are-required-for-a-set-of-counters">How do I determine how many passes are required for a set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-a-set-of-single-pass-counter-files-from-a-given-set-of-counters">How do I generate a set of single-pass counter files from a given set of counters?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-force-a-single-pass-profile">How do I force a single-pass profile?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-limit-the-amount-of-profiling-data-generated">How do I limit the amount of profiling data generated?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#general-features-for-limiting-profiling-data">General features for limiting profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#features-specific-to-application-trace-mode">Features specific to Application Trace mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html#features-specific-to-performance-counter-mode">Features specific to Performance Counter mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-html-summary-pages">How do I generate HTML Summary Pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-specify-which-rules-should-be-used-when-generating-summary-pages">How do I specify which rules should be used when generating Summary pages?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-find-out-which-source-code-called-a-particular-api-call-in-the-application-trace-file-atp-file">How do I find out which source code called a particular API call in the Application Trace file (.atp file)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-generate-a-kernel-occupancy-display-html-file">How do I generate a Kernel Occupancy Display HTML file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-annotate-the-timeline-data-with-application-specific-events">How do I annotate the timeline data with application specific events?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-collect-gpu-performance-counters-directly-from-my-application-without-using-the-profiler">How do I collect GPU Performance Counters directly from my application without using the profiler?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-ensure-that-my-opencl-application-trace-contains-all-api-trace-data">How do I ensure that my OpenCL application trace contains all API trace data?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto.html#how-do-i-report-an-issue-with-radeon-compute-profiler">How do I report an issue with Radeon Compute Profiler</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Radeon Compute Profiler</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Kernel Occupancy</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="kernel-occupancy">
+<span id="id1"></span><h1>Kernel Occupancy<a class="headerlink" href="#kernel-occupancy" title="Permalink to this headline">¶</a></h1>
+<p>This page provides an overview of the kernel occupancy calculation, providing
+the definition of the parameter and discussing the factors influencing the
+value and its interpretation.</p>
+<p>Kernel occupancy is a measure of the use of the resources of a compute unit on
+a GPU, the use being measured by the number of in-flight wavefronts, for a
+given kernel, relative to the number of wavefronts that can be launched given
+the ideal kernel dispatch configuration (dependent on the work-group size and
+resource use in the kernel).</p>
+<p>The number of wavefronts that are scheduled when a kernel is dispatched is
+constrained by three significant factors:</p>
+<ul class="simple">
+<li>the number of general purpose registers (GPR) required by each work-item,</li>
+<li>the amount of shared memory (LDS for local data store) used by each
+work-group, and</li>
+<li>the configuration of the work-group (the work-group size).</li>
+</ul>
+<p>The basic definition of the occupancy (O) is given by:</p>
+<img alt="_images/occ_01.png" src="_images/occ_01.png" />
+<p>where N<sub>W</sub><sup>A</sup> is the number of in-flight wavefronts on the
+compute unit, and N<sub>W</sub><sup>T</sup> is the theoretical number of wavefronts
+that the compute unit can execute concurrently.</p>
+<p>The first constraint is that work that is assigned to a compute unit is
+scheduled as groups of individual work-items, called wavefronts, which have a
+fixed size defined by the hardware. The characteristic of a wavefront is that
+each work-item executes in step with the other work-items in the wavefront. The
+number of work-items that can be executed on a compute unit must be a multiple
+of a wavefront. In an ideal situation, the number of wavefronts that can be
+scheduled corresponds to the maximum number of wavefronts supported by the
+compute unit.</p>
+<p>However, because there are resources that are shared among work-groups, which is
+the basic unit of processing on the compute unit, wavefronts are scheduled as
+part of a work-group. A work-group consists of a collection of work-items that
+make use of a common block of local data storage (LDS) that is shared among the
+members of the work-group, as well as registers. Each work-group consists of one
+or more wavefronts. Thus, the total number of wavefronts that can be launched on
+a compute unit is also constrained by the number of work-groups as this must
+correspond to an integral number of workgroups, even if the compute unit has
+capacity for additional wavefronts. In the ideal situation, the number of
+wavefronts that can be launched is an integral multiple of the number of
+wavefronts per work-group, which means that the maximum number of wavefronts the
+GPU is capable of allocating, can be achieved. When this is not the case,
+changing the size of the work-items in the work-group can change the number of
+wavefronts in the work-group.</p>
+<div class="section" id="kernel-occupancy-for-amd-radeon-hd-5000-6000-series-based-on-vliw5-vliw4-architecture">
+<h2>Kernel Occupancy for AMD Radeon™ HD 5000/6000 Series Based on VLIW5/VLIW4 Architecture<a class="headerlink" href="#kernel-occupancy-for-amd-radeon-hd-5000-6000-series-based-on-vliw5-vliw4-architecture" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lds-limits-on-the-number-of-in-flight">
+<h3>1. LDS limits on the number of in-flight<a class="headerlink" href="#lds-limits-on-the-number-of-in-flight" title="Permalink to this headline">¶</a></h3>
+<p>In the case that the LDS is the only constraint on the number of in-flight
+wavefronts, the compute unit can support the launch of a number of in-flight
+work-groups given by:</p>
+<img alt="_images/occ_02.png" src="_images/occ_02.png" />
+<p>where WG<sub>max</sub> is the maximum number of work-groups on a compute unit,
+LDS<sub>CU</sub> is the shared memory available on the compute unit, and
+LDS<sub>wg</sub> is the shared memory required by the work-group (based on the
+resources required by the kernel). The corresponding number of wavefronts is
+given as:</p>
+<img alt="_images/occ_03.png" src="_images/occ_03.png" />
+<p>where WF<sub>max</sub> is the maximum number of wavefronts, WG<sub>max</sub> is the
+maximum number of work-groups, and WF<sub>WG</sub> is the number of wavefronts in
+a work-group.</p>
+<p>There is also another constraint whereby a compute unit can only support a fixed
+number of work-groups, a hard limit of WG<sub>max</sub>=8 (denoted by
+WG<sub>max</sub><sup>CU</sup>). This also limits the effectiveness of reducing the
+work-group size excessively, as the number of wavefronts is also limited by the
+maximum workgroup size. Currently, the maximum work-group size is 256
+work-items, which means that the maximum number of wavefronts is 4 when the
+wavefront size is 64 (and 8 when the wavefront size is 32).</p>
+<p>Thus, when the only limit to the number of wavefronts on a compute unit is set
+by the LDS usage (for a given kernel), then the maximum number of wavefronts,
+(LDS-limited) is given by:</p>
+<img alt="_images/occ_04.png" src="_images/occ_04.png" />
+</div>
+<div class="section" id="gpr-limits-on-the-number-of-in-flight-wavefronts">
+<h3>2. GPR limits on the number of in-flight wavefronts<a class="headerlink" href="#gpr-limits-on-the-number-of-in-flight-wavefronts" title="Permalink to this headline">¶</a></h3>
+<p>Another limit on the number of in-flight wavefronts is the number of
+general-purpose registers (GPRs). Each compute unit has 16384 registers. These
+are divided among the work-items in a wavefront. Thus, the number of registers
+per work-item limits the number of wavefronts that can be launched. This can be
+expressed as:</p>
+<img alt="_images/occ_05.png" src="_images/occ_05.png" />
+<p>where N<sub>reg</sub> is the number of registers per work-item; the superscripts
+max and used refer to the maximum number of registers per thread and the actual
+number of registers used.</p>
+<p>The number of in-flight wavefronts being constrained by the work-group
+granularity, the number of GPR-limited wavefronts is given by:</p>
+<img alt="_images/occ_06.png" src="_images/occ_06.png" />
+</div>
+<div class="section" id="other-constraints">
+<h3>3. Other constraints<a class="headerlink" href="#other-constraints" title="Permalink to this headline">¶</a></h3>
+<p>Another limit on the number of in-flight wavefronts is the FCStack; however,
+this is really an insignificant constraint, so this is not considered here.</p>
+<p>The final factor in the occupancy is the work-group size, as briefly discussed
+above. If there are no other constraints on the number of wavefronts on the
+compute unit, the maximum number of wavefronts is given by:</p>
+<img alt="_images/occ_07.png" src="_images/occ_07.png" />
+<p>where WF<sub>max</sub><sup>CU</sup> is the maximum number of wavefronts on the
+compute unit and WF<sub>WG</sub><sup>max</sup> is the maximum number of wavefronts
+on a compute unit when there are no other constraints than the work-group size.</p>
+<p>This equation shows that having a workgroup size where the number of wavefronts
+divides the maximum number of wavefronts on the compute unit evenly generally
+yields the greatest number of in-flight wavefronts, while at the same time
+indicating that making the work-group size too small yields a reduced number of
+wavefronts. For example, setting a workgroup consisting of only 1 wavefront
+yields only 8 in-flight wavefronts, whereas (for example, given a maximum number
+of wavefronts on the compute unit of 32), a work-group of 2 wavefronts will
+yield 16 wavefronts. Furthermore, having a single wavefront per work-group
+doubles the LDS usage relative to having 2 wavefronts per work-group as the LDS
+is only shared among the wavefronts in a same work-group (but not between
+work-groups).</p>
+<p>Given these constraints, the maximum number of in-flight wavefronts is given by:</p>
+<img alt="_images/occ_08.png" src="_images/occ_08.png" />
+<p>Thus, the occupancy, O, is given by:</p>
+<img alt="_images/occ_09.png" src="_images/occ_09.png" />
+<p>The occupancy shown here is the estimated occupancy on a single compute unit.
+It is independent of the work-loads on the other compute units on the GPU
+because the occupancy is only really meaningful if there are sufficient
+work-items to require all the resources of at least one compute unit (and even
+then, ideally, there should be a sufficient work-load to ensure that more than
+one compute unit is needed to execute the work in order to gain the benefits of
+parallel operations). Higher occupancy allows for increased global memory
+latency hiding as it allows wavefronts to be swapped when there are global
+memory accesses. However, once there is a sufficient number of wavefronts on the
+compute unit to hide any global memory accesses, increasing occupancy may not
+increase performance.</p>
+</div>
+</div>
+<div class="section" id="kernel-occupancy-for-amd-radeon-hd-7000-series-or-newer-based-on-graphics-core-next-architecture">
+<h2>Kernel Occupancy for AMD Radeon™ HD 7000 Series or Newer, Based on Graphics Core Next Architecture<a class="headerlink" href="#kernel-occupancy-for-amd-radeon-hd-7000-series-or-newer-based-on-graphics-core-next-architecture" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of significant differences from the previous occupancy
+calculation due to the different architecture. In the Graphics Core Next
+architecture, each compute unit is actually made up of four SIMDs. While some
+features, such as the GPRs, are still computed on the basis of individual
+SIMDs, these must be scaled to the whole compute unit. On the other hand,
+work-group limits must be computed over the whole compute unit. These are
+detailed below.</p>
+<p>The first limit to the number of active wavefronts on the compute unit is the
+work-group size. Each Compute unit (CU), has up to 40 slots for wavefronts.
+If each work-group is exactly one wavefront, then the maximum number of
+wavefronts is:</p>
+<img alt="_images/occ_10.png" src="_images/occ_10.png" />
+<p>Otherwise, if there is more than one wavefront (WF) per work-group (WG), there
+is an upper limit of 16 work-groups (WG) per compute unit (CU). Then, the
+maximum number of wavefronts on the compute unit is given by:</p>
+<img alt="_images/occ_11.png" src="_images/occ_11.png" />
+<p>where WF<sub>WG</sub> is the number of wavefronts per work group.</p>
+<p>The second limit on the number of active wavefronts is the number of VGPR per
+SIMD.</p>
+<img alt="_images/occ_12.png" src="_images/occ_12.png" />
+<p>Where VGPR<sub>max</sub> is maximum number of registers per work-item and
+VGPR<sub>used</sub> is the actual number of registers used per work-item. However,
+we are interested in the total number of wavefronts per CU, so we have to scale
+this value by the number of CU.</p>
+<img alt="_images/occ_13.png" src="_images/occ_13.png" />
+<p>At the same time, the number of wavefronts cannot exceed WF<sub>max</sub>, so</p>
+<img alt="_images/occ_14.png" src="_images/occ_14.png" />
+<p>However, the wavefronts are constrained by work-group granularity, so the
+maximum number of wavefronts limited by the VGPR is given by</p>
+<img alt="_images/occ_15.png" src="_images/occ_15.png" />
+<p>The third limit on the number of active wavefronts is the number of SGPR.
+Similar to VGPR, SGPR is calculated by:</p>
+<img alt="_images/occ_16.png" src="_images/occ_16.png" />
+<p>The final limit on the number of active wavefronts is the LDS. The LDS limited
+number of wavefronts is given by:</p>
+<img alt="_images/occ_17.png" src="_images/occ_17.png" />
+<p>where WG<sub>max</sub> is the maximum number of work-groups determined by the LDS.
+Then, the maximum number of wavefronts is given by:</p>
+<img alt="_images/occ_18.png" src="_images/occ_18.png" />
+<p>Thus, the occupancy, O, is given by:</p>
+<img alt="_images/occ_19.png" src="_images/occ_19.png" />
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="howto.html" class="btn btn-neutral float-right" title="How Do I…" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configfiles.html" class="btn btn-neutral" title="Configuration Files" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Advanced Micro Devices, Inc. All rights reserved.
+    </p>
+  </div>
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
